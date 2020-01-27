@@ -1,0 +1,165 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+@model crm.ViewModels.ViewPatientViewModel
+
+
+<div class="container" style="width: 100%; max-width:100%;">
+    <div class="row" style="display:flex;">
+        <div class="col-9">
+            <div class="row">
+                <div class="col-3">
+                    <p style="font-size: 14px; font-weight: bold;">UPCOMING APPOINTMENT</p>
+
+                    @{var appointment = Model.Patient.Appointments.Where(x => x.StartTime > DateTime.Now).First();}
+
+                    @if (appointment == null)
+                    {
+                        <div class="card" style="width: 30rem;">
+                            <div class="card-body">
+                                <p>No upcoming appointment</p>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                    <div class="card" style="width: 30rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">@Model.Doctors.Where(x => x.Id == appointment.DoctorID).Single().FirstName @Model.Doctors.Where(x => x.Id == appointment.DoctorID).Single().LastName</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">@Model.Doctors.Where(x => x.Id == appointment.DoctorID).Single().Speciality</h6>
+                            <p class="card-text">@appointment.StartTime</p>
+                            <p class="card-text">@appointment.EndTime</p>
+                            <a asp-controller="Appointment" asp-route-id="@appointment.Id" class="card-link">View</a>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col">
+                    <p style="font-size: 14px; font-weight: bold;">TESTS</p>
+
+                    @foreach (var test in Model.Patient.Tests)
+                    {
+                        <div class="card" style="width: 20rem; display: inline-block;">
+                            <div class="card-body">
+                                <h5 class="card-title">@test.Name</h5>
+                            </div>
+                        </div>
+                     }
+
+                    </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-6">
+                    <p style="font-size: 14px; font-weight: bold;">APPOINTMENTS</p>
+                    <div class="card" style="">
+                        <div class="card-body">
+                            <div style="border: 2px dotted green; margin-bottom: 2rem;">
+                                <p style="padding: 5px 20px; text-align: center; margin-top: 1rem; font-size: 18px; color: green;">Add an appointment</p>
+                            </div>
+                            @foreach (var appt in Model.Patient.Appointments.Take(3).ToList())
+                            {
+                                <h5 class="card-title">@appt.Doctor.FirstName @appt.Doctor.LastName</h5>
+                                <p class="card-text">@appt.Doctor.Speciality</p>
+                                <p class="card-text">@appt.StartTime</p>
+                                <p class="card-text">@appt.EndTime</p>
+                                <hr />
+                            }
+
+                        </div>
+                    </div>
+                    @*<div style="background-color: #000; height: 350px;"><p style="color: #fff; font-weight:bold; font-size: 14px; text-align: center;">COMING SOON</p></div>*@
+                </div>
+                <div class="col-6">
+                    <p style="font-size: 14px; font-weight: bold;">PRESCRIPTIONS</p>
+
+                    <div class="card" style="">
+                        <div class="card-body">
+                            <div style="border: 2px dotted green; margin-bottom: 2rem;">
+                                <p style="padding: 5px 20px; text-align: center; margin-top: 1rem; font-size: 18px; color: green;">Add a prescription</p>
+                            </div>
+                            <p class="patientdata-title">MEDICATION</p>
+                            <hr class="patientdata-hr" />
+                            @foreach (var prescription in Model.Patient.Presciptions)
+                            {
+                                <p class="card-title">@prescription.Name</p>
+                            }
+
+                        </div>
+                    </div>
+
+                    @*<div style="background-color: #000; height: 350px;"><p style="color: #fff; font-weight:bold; font-size: 14px; text-align: center;">COMING SOON</p></div>*@
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <p style="font-size: 14px; font-weight: bold;">PATIENT INFORMATION</p>
+
+            <div class="card patient-card" style="">
+                <img src="https://bks-partners.com/wp-content/uploads/2019/06/confused-patient.jpeg"style="width: 100%; border: 0px solid transparent; border-radius: 20px 20px 0 0; padding: 0;"  class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text bold" style="font-size: 24px;">@Model.Patient.FirstName @Model.Patient.LastName</p>
+
+                    <p class="patientdata-title">DETAILS</p>
+
+                    <hr class="patientdata-hr"/>
+
+                    <div class="patient-data-entry">
+                        <p class="card-text patient-data">Age</p>
+                        <p class="card-text bold patient-data" style="text-align: right;">@Model.Patient.Age</p>
+                    </div>
+                    <div class="patient-data-entry">
+                        <p class="card-text patient-data">Gender</p>
+                        <p class="card-text patient-data bold" style="text-align: right;">@Model.Patient.Gender</p>
+                    </div>
+                    <div class="patient-data-entry">
+                        <p class="card-text patient-data">Marital status</p>
+                        <p class="card-text patient-data bold" style="text-align: right;">@Model.Patient.MaritalStatus</p>
+                    </div>
+                    <div class="patient-data-entry">
+                        <p class="card-text patient-data">Blood type</p>
+                        <p class="card-text patient-data bold" style="text-align: right;">@Model.Patient.BloodType</p>
+                    </div>
+                    <div class="patient-data-entry">
+                        <p class="card-text patient-data">Height</p>
+                        <p class="card-text patient-data bold" style="text-align: right;">@(Model.Patient.Height / 12)' @(Model.Patient.Height % 12)"</p>
+                    </div>
+                    <div class="patient-data-entry">
+                        <p class="card-text patient-data">Weight</p>
+                        <p class="card-text patient-data bold" style="text-align: right;">@Model.Patient.Weight lb</p>
+                    </div>
+                    <div class="patient-data-entry">
+                        <p class="card-text patient-data">BMI</p>
+                        <p class="card-text patient-data bold" style="text-align: right;">@Model.Patient.BMI</p>
+                    </div>
+                    <div class="patient-data-entry">
+                        <p class="card-text patient-data">BF percentage</p>
+                        <p class="card-text patient-data bold" style="text-align: right;">@Model.Patient.BFPercentage</p>
+                    </div>
+
+                    <br />
+                    <p class="patientdata-title">ALLERGIES</p>
+
+                    <hr class="patientdata-hr"/>
+
+                    <div class="patient-data-entry">
+                        @foreach (var allergy in Model.Allergies)
+                        {
+                            <span class="dot"></span>
+                            <p class="card-text patient-data">@allergy.Allergy.Name</p>
+                        }
+
+                    </div>
+
+                    @*<p class="card-text"></p>*@
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

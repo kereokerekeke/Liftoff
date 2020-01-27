@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200125205620_Initial.cs" />
+    <Compile Remove="Migrations\20200125205620_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20200126071344_ManuToManyAddition.cs" />
+    <Compile Remove="Migrations\20200126071344_ManuToManyAddition.Designer.cs" />
+    <Compile Remove="Migrations\20200126072009_Initial.cs" />
+    <Compile Remove="Migrations\20200126072009_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20200126073056_Initial.cs" />
+    <Compile Remove="Migrations\20200126073056_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20200126223033_Initial2.cs" />
+    <Compile Remove="Migrations\20200126223033_Initial2.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" />
+  </ItemGroup>
+
+</Project>
