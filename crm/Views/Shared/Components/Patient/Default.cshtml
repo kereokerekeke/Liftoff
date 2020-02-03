@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewData["Title"] = "Default";
+}
+
+@model crm.Models.Patient
+
+<div class="card patient-card" style="">
+    <img src="https://bks-partners.com/wp-content/uploads/2019/06/confused-patient.jpeg" style="width: 100%; border: 0px solid transparent; border-radius: 20px 20px 0 0; padding: 0;" class="card-img-top" alt="...">
+    <div class="card-body">
+        <p class="card-text bold" style="font-size: 24px;">@Model.FirstName @Model.LastName</p>
+
+        <p class="patientdata-title">DETAILS</p>
+
+        <hr class="patientdata-hr" />
+
+        <div class="patient-data-entry">
+            <p class="card-text patient-data">Age</p>
+            <p class="card-text bold patient-data" style="text-align: right;">@Model.Age</p>
+        </div>
+        <div class="patient-data-entry">
+            <p class="card-text patient-data">Gender</p>
+            <p class="card-text patient-data bold" style="text-align: right;">@Model.Gender</p>
+        </div>
+        <div class="patient-data-entry">
+            <p class="card-text patient-data">Marital status</p>
+            <p class="card-text patient-data bold" style="text-align: right;">@Model.MaritalStatus</p>
+        </div>
+        <div class="patient-data-entry">
+            <p class="card-text patient-data">Blood type</p>
+            <p class="card-text patient-data bold" style="text-align: right;">@Model.BloodType</p>
+        </div>
+        <div class="patient-data-entry">
+            <p class="card-text patient-data">Height</p>
+            <p class="card-text patient-data bold" style="text-align: right;">@(Model.Height / 12)' @(Model.Height % 12)"</p>
+        </div>
+        <div class="patient-data-entry">
+            <p class="card-text patient-data">Weight</p>
+            <p class="card-text patient-data bold" style="text-align: right;">@Model.Weight lb</p>
+        </div>
+        <div class="patient-data-entry">
+            <p class="card-text patient-data">BMI</p>
+            <p class="card-text patient-data bold" style="text-align: right;">@Model.BMI</p>
+        </div>
+        <div class="patient-data-entry">
+            <p class="card-text patient-data">BF percentage</p>
+            <p class="card-text patient-data bold" style="text-align: right;">@Model.BFPercentage</p>
+        </div>
+
+        <br />
+        <p class="patientdata-title">ALLERGIES</p>
+
+        <hr class="patientdata-hr" />
+
+        <div class="patient-data-entry">
+            @foreach (var allergy in Model.PatientAllergies)
+            {
+                <span class="dot"></span>
+                <p class="card-text patient-data">@allergy.Allergy.Name</p>
+            }
+
+        </div>
+    </div>
+</div>

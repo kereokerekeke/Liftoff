@@ -13,7 +13,7 @@
                 <div class="col-3">
                     <p style="font-size: 14px; font-weight: bold;">UPCOMING APPOINTMENT</p>
 
-                    @{var appointment = Model.Patient.Appointments.Where(x => x.StartTime > DateTime.Now).First();}
+                    @{var appointment = Model.Patient.Appointments.Where(x => x.StartTime > DateTime.Now).FirstOrDefault();}
 
                     @if (appointment == null)
                     {
@@ -100,64 +100,9 @@
         <div class="col-3">
             <p style="font-size: 14px; font-weight: bold;">PATIENT INFORMATION</p>
 
-            <div class="card patient-card" style="">
-                <img src="https://bks-partners.com/wp-content/uploads/2019/06/confused-patient.jpeg"style="width: 100%; border: 0px solid transparent; border-radius: 20px 20px 0 0; padding: 0;"  class="card-img-top" alt="...">
-                <div class="card-body">
-                    <p class="card-text bold" style="font-size: 24px;">@Model.Patient.FirstName @Model.Patient.LastName</p>
-
-                    <p class="patientdata-title">DETAILS</p>
-
-                    <hr class="patientdata-hr"/>
-
-                    <div class="patient-data-entry">
-                        <p class="card-text patient-data">Age</p>
-                        <p class="card-text bold patient-data" style="text-align: right;">@Model.Patient.Age</p>
-                    </div>
-                    <div class="patient-data-entry">
-                        <p class="card-text patient-data">Gender</p>
-                        <p class="card-text patient-data bold" style="text-align: right;">@Model.Patient.Gender</p>
-                    </div>
-                    <div class="patient-data-entry">
-                        <p class="card-text patient-data">Marital status</p>
-                        <p class="card-text patient-data bold" style="text-align: right;">@Model.Patient.MaritalStatus</p>
-                    </div>
-                    <div class="patient-data-entry">
-                        <p class="card-text patient-data">Blood type</p>
-                        <p class="card-text patient-data bold" style="text-align: right;">@Model.Patient.BloodType</p>
-                    </div>
-                    <div class="patient-data-entry">
-                        <p class="card-text patient-data">Height</p>
-                        <p class="card-text patient-data bold" style="text-align: right;">@(Model.Patient.Height / 12)' @(Model.Patient.Height % 12)"</p>
-                    </div>
-                    <div class="patient-data-entry">
-                        <p class="card-text patient-data">Weight</p>
-                        <p class="card-text patient-data bold" style="text-align: right;">@Model.Patient.Weight lb</p>
-                    </div>
-                    <div class="patient-data-entry">
-                        <p class="card-text patient-data">BMI</p>
-                        <p class="card-text patient-data bold" style="text-align: right;">@Model.Patient.BMI</p>
-                    </div>
-                    <div class="patient-data-entry">
-                        <p class="card-text patient-data">BF percentage</p>
-                        <p class="card-text patient-data bold" style="text-align: right;">@Model.Patient.BFPercentage</p>
-                    </div>
-
-                    <br />
-                    <p class="patientdata-title">ALLERGIES</p>
-
-                    <hr class="patientdata-hr"/>
-
-                    <div class="patient-data-entry">
-                        @foreach (var allergy in Model.Allergies)
-                        {
-                            <span class="dot"></span>
-                            <p class="card-text patient-data">@allergy.Allergy.Name</p>
-                        }
-
-                    </div>
-
-                    @*<p class="card-text"></p>*@
-                </div>
+           
+            <div>
+                @await Component.InvokeAsync("Patient", new { id = Model.Patient.Id })
             </div>
 
         </div>

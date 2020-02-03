@@ -19,9 +19,9 @@ namespace crm.Controllers
 
         public IActionResult Index(int id)
         {
+            var appointment = dbContext.Appointments.Single(x => x.Id == id);
 
-
-            return View(id);
+            return View(appointment);
         }
     }
 }

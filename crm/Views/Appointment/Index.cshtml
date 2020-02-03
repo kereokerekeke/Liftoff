@@ -3,8 +3,37 @@
     ViewData["Title"] = "Index";
 }
 
-@model int
+@model crm.Models.Appointment
 
-<h1>Index</h1>
 
-<p>@Model</p>
+    <div class="container" style="width: 100%; max-width:100%;">
+        <div class="row" style="display:flex;">
+
+            <div class="col-9">
+
+                <div class="row">
+
+                    <p style="font-size: 14px; font-weight: bold;">APPOINTMENT NOTE</p>
+
+                    <div class="card" style="width: 100%">
+                        <div class="card-body">
+                            <p class="card-text">@Model.Note</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-3">
+
+                <p style="font-size: 14px; font-weight: bold;">PATIENT INFORMATION</p>
+
+
+                <div>
+                    @await Component.InvokeAsync("Patient", new { id = Model.PatientID })
+                </div>
+
+            </div>
+        </div>
+    </div>
