@@ -7,23 +7,102 @@
 
 
     <div class="container" style="width: 100%; max-width:100%;">
+
+
+        @if (Model == null)
+        {
+            <div>
+                <h1>No appointment with such ID</h1>
+            </div>
+        }
+        else
+        {
+
         <div class="row" style="display:flex;">
 
             <div class="col-9">
 
                 <div class="row">
 
-                    <p style="font-size: 14px; font-weight: bold;">APPOINTMENT NOTE</p>
+                    <div class="col-9">
 
-                    <div class="card" style="width: 100%">
-                        <div class="card-body">
-                            <p class="card-text">@Model.Note</p>
+
+                        <div class="row">
+
+
+                            <div class="col-12">
+                                <p style="font-size: 14px; font-weight: bold;">APPOINTMENT INFORMATION</p>
+
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@Model.Doctor.FirstName @Model.Doctor.LastName</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">@Model.Doctor.Speciality</h6>
+                                        <p class="card-text">@Model.StartTime</p>
+                                        <p class="card-text">@Model.EndTime</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <br />
+
+                        <div class="row">
+                            <div class="col-12">
+                                <p style="font-size: 14px; font-weight: bold;">PRESCRIPTIONS</p>
+
+                                <div class="card" style="">
+                                    <div class="card-body">
+                                        <div style="border: 2px dotted green; margin-bottom: 2rem;">
+                                            <p style="padding: 5px 20px; text-align: center; margin-top: 1rem; font-size: 18px; color: green;">Add a prescription</p>
+                                        </div>
+                                        <p class="patientdata-title">MEDICATION</p>
+                                        <hr class="patientdata-hr" />
+                                        @foreach (var prescription in Model.Prescriptions)
+                                        {
+                                            <p class="card-title">@prescription.Name</p>
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <p style="font-size: 14px; font-weight: bold;">TESTS</p>
+
+                        @foreach (var test in Model.Tests)
+                        {
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">@test.Name</h5>
+                                </div>
+                            </div>
+                            <br />
+                        }
+
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="row">
+
+                    <div class="col-12">
+                        <p style="font-size: 14px; font-weight: bold;">APPOINTMENT NOTE</p>
+
+                        <div class="card" style="width: 100%">
+                            <div class="card-body">
+                                <p class="card-text">@Model.Note</p>
+                            </div>
                         </div>
                     </div>
 
                 </div>
 
             </div>
+
 
             <div class="col-3">
 
@@ -35,5 +114,8 @@
                 </div>
 
             </div>
+
         </div>
+    }
+
     </div>

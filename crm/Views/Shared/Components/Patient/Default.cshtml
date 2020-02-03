@@ -8,7 +8,7 @@
 <div class="card patient-card" style="">
     <img src="https://bks-partners.com/wp-content/uploads/2019/06/confused-patient.jpeg" style="width: 100%; border: 0px solid transparent; border-radius: 20px 20px 0 0; padding: 0;" class="card-img-top" alt="...">
     <div class="card-body">
-        <p class="card-text bold" style="font-size: 24px;">@Model.FirstName @Model.LastName</p>
+        <p class="card-text bold" style="font-size: 24px;"><a style="color: black" asp-controller="Patient" asp-action="Index" asp-route-id="@Model.Id">@Model.FirstName @Model.LastName</a></p>
 
         <p class="patientdata-title">DETAILS</p>
 

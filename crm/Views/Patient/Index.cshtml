@@ -7,6 +7,7 @@
 
 
 <div class="container" style="width: 100%; max-width:100%;">
+
     <div class="row" style="display:flex;">
         <div class="col-9">
             <div class="row">
@@ -68,6 +69,7 @@
                                 <p class="card-text">@appt.Doctor.Speciality</p>
                                 <p class="card-text">@appt.StartTime</p>
                                 <p class="card-text">@appt.EndTime</p>
+                                <a asp-controller="Appointment" asp-route-id="@appt.Id" class="card-link">View</a>
                                 <hr />
                             }
 
