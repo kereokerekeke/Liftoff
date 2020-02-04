@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewData["Title"] = "Add";
+}
+
+@model crm.ViewModels.AddPatientViewModel
+
+<div asp-validation-summary="All"></div>
+
+<form asp-controller="Patient" asp-action="Add" method="post">
+
+    <div class="form-group">
+        <label asp-for="FirstName"></label>
+        <input class="form-control" asp-for="FirstName" />
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+        <input class="form-control" asp-for="LastName" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Age"></label>
+        <input class="form-control" asp-for="Age" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Gender"></label>
+        <input class="form-control" asp-for="Gender" />
+    </div>
+    <div class="form-group">
+        <label asp-for="MaritalStatus"></label>
+        <input class="form-control" asp-for="MaritalStatus" />
+    </div>
+    <div class="form-group">
+        <label asp-for="BloodType"></label>
+        <input class="form-control" asp-for="BloodType" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Height"></label>
+        <input class="form-control" asp-for="Height" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Weight"></label>
+        <input class="form-control" asp-for="Weight" />
+    </div>
+    <div class="form-group">
+        <label asp-for="BMI"></label>
+        <input class="form-control" asp-for="BMI" />
+    </div>
+    <div class="form-group">
+        <label asp-for="BFPercentage"></label>
+        <input class="form-control" asp-for="BFPercentage" />
+    </div>
+    <input class="btn-primary align-content-center" type="submit" value="Add Patient" />
+
+</form>
+

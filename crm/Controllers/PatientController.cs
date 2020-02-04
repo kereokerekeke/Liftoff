@@ -38,5 +38,38 @@ namespace crm.Controllers
 
             return View(viewPatientViewModel);
         }
+
+        public IActionResult Add()
+        {
+            AddPatientViewModel addPatientViewModel = new AddPatientViewModel();
+
+            return View(addPatientViewModel);
+        }
+
+
+        [HttpPost]
+        public IActionResult Add(AddPatientViewModel addPatientViewModel)
+        {
+            Patient newPatient = new Patient
+            {
+                FirstName = addPatientViewModel.FirstName,
+                LastName = addPatientViewModel.LastName,
+                Age = addPatientViewModel.Age,
+                Gender = addPatientViewModel.Gender,
+                MaritalStatus = addPatientViewModel.MaritalStatus,
+                BloodType = addPatientViewModel.BloodType,
+                Height = addPatientViewModel.Height,
+                Weight = addPatientViewModel.Weight,
+                BMI = addPatientViewModel.BMI,
+                BFPercentage = addPatientViewModel.BFPercentage
+            };
+
+            dbContext.Patients.Add(newPatient);
+
+            dbContext.SaveChanges();
+
+            return Redirect($"/Patient?id={newPatient.Id}");
+        }
+
     }
 }
