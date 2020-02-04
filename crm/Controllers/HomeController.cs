@@ -23,11 +23,15 @@ namespace crm.Controllers
         }
 
 
-        public IActionResult Index(int id)
+        public IActionResult Index(int id)  // id is DoctorId
         {
-            //var doctor = dbContext.Doctors.Include(x => x.Appointments).Single(x => x.Id == 1);
 
-            return View(/*doctor*/);
+            var appointments = dbContext.Appointments.Include(x => x.Doctor)
+                                                     .Include(x => x.Patient)
+                                                     .Where(x => x.DoctorID == id)
+                                                     .ToList();
+
+            return View(appointments);
         }
 
         public IActionResult Privacy()

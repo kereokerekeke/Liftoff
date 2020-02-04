@@ -2,22 +2,58 @@
     ViewData["Title"] = "Home Page";
 }
 
-@model crm.Models.Doctor
+@model IList<crm.Models.Appointment>
 
-    <div class="text-center">
-        <h1 class="display-4">Hello world! This is a placeholder for the main page.</h1>
 
-        @*@foreach (var appointment in Model.Appointments)
-        {
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">@appointment.Doctor.FirstName @appointment.Doctor.LastName</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">@appointment.Doctor.Speciality</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
+    <div class="container" style="width: 100%; max-width:100%;">
+
+        <div class="row" style="display:flex;">
+            <div class="col-9">
+
+                <p style="font-size: 14px; font-weight: bold;">APPOINTMENTS FOR TODAY</p>
+                <div class="text-center">
+
+                    @foreach (var appointment in Model)
+                    {
+                        if (appointment.StartTime.Date == DateTime.Today.Date)
+                        {
+                            <div class="card" style="width: 100%;">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <a style="color: black;" asp-controller="Patient" 
+                                                                 asp-action="Index" 
+                                                                 asp-route-id="@appointment.PatientID">
+                                            @appointment.Patient.FirstName @appointment.Patient.LastName
+                                        </a>
+                                    </h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">@appointment.Patient.Gender</h6>
+                                    <p class="card-text">@appointment.StartTime @appointment.EndTime</p>
+                                    <a asp-controller="Appointment" asp-action="Index" asp-route-id="@appointment.Id" class="card-link">View</a>
+                                </div>
+                            </div>
+                        }
+                    }
+
                 </div>
             </div>
-        }*@
+            <div class="col-3">
+                <p style="font-size: 14px; font-weight: bold;">STATISTICS</p>
+                <div class="card" style="width: 100%;">
+                    <div class="card-body">
+                        <h2 class="card-title" style="text-align:center;">Appointments Today</h2>
+                        <h3 class="card-subtitle mb-2 text-muted" style="text-align:center;">@Model.Where(x => x.StartTime.Date == DateTime.Today.Date).Count()</h3>
+                        <br />
+                        <h2 class="card-title" style="text-align:center;">Appointments This week</h2>
+                        @{DateTime endofweek = DateTime.Today.AddHours(23).AddMinutes(59);
+                            while (endofweek.DayOfWeek != DayOfWeek.Friday)
+                            {
+                                endofweek = endofweek.AddDays(1);
+                            }
+                        }
 
+                        <h3 class="card-subtitle mb-2 text-muted" style="text-align:center;">@Model.Where(x => x.StartTime.Date <= endofweek.Date && x.StartTime >= DateTime.Today.Date).Count()</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
